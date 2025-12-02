@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Contacto - Clothe's Online</title>
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="estilo.css">
+
+<body>
+
+<!-- Botón del menú -->
+<i class='bx bx-menu menu-btn' onclick="abrirMenu()"></i>
+
+<!-- ========== MENÚ ========== -->
+<div id="menu" class="menu">
+    <a href="javascript:void(0)" onclick="cerrarMenu()">Cerrar ✖</a>
+    <a href="Index.html">Inicio</a>
+
+    <a href="javascript:void(0)" onclick="toggleSubmenu()">
+        Productos 
+        <i id="flecha" class='bx bx-chevron-right flecha'></i>
+    </a>
+
+    <div id="submenu" class="submenu">
+        <a href="Lamparas.html">Lamparas</a>
+        <a href="pantalones.html">Pantalones</a>
+        <a href="tops.html">Tops</a>
+        <a href="vestidos.html">Vestidos</a>
+        <a href="acces.html">Accesorios</a>
+    </div>
+
+    <a href="contacto.html">Compra</a>
+</div>
+
+<!-- ========== CONTENIDO ========== -->
+<div class="contenedor">
+    <h1>Compra</h1>
+    <p>Llena los siguientes campos, para procesar tu compra y programar un envio</p>
+
+   <div class="formulario">
+    <form id="formContacto">
+
+        <label>Nombre completo:</label>
+        <input type="text" placeholder="Ingresa tu nombre">
+
+        <label>Correo electrónico:</label>
+        <input type="email" placeholder="Ingresa tu correo">
+	
+	<label>Calle:</label>
+        <input type="text" placeholder="Ingresa tu Calle">
+
+	<label>Localidad:</label>
+        <input type="text" placeholder="Ingresa tu Localidad">
+
+	<label>Estado:</label>
+        <input type="text" placeholder="Ingresa tu Estado">
+
+	<label>Numero de telefono:</label>
+        <input type="text" placeholder="Ingresa tu Numero de telefono">
+
+        <label>Referencias:</label>
+        <textarea rows="5" placeholder="Escribe referencias sobre tu domicilio"></textarea>
+
+	<label>Forma de pago:</label>
+        <select>
+            <option value="">Selecciona una opción</option>
+            <option value="compra">Tarjeta de debito o credito</option>
+            <option value="soporte">Paypal</option>
+        </select>
+
+	<label>Nombre del titular de la tarjeta:</label>
+        <input type="text" placeholder="Ingresa el nombre del titular">
+
+	<label>Numero de tarjeta:</label>
+        <input type="text" placeholder="Ingresa tu Numero de tarjeta">
+
+	<label>Numero de MM/AA:</label>
+        <input type="text" placeholder="">
+
+	<label>Codigo de seguridad:</label>
+        <input type="text" placeholder="Ingresa tu Codigo de seguridad">
+
+        <button type="button" onclick="enviarMensaje()">Enviar mensaje</button>
+
+    </form>
+</div>
+<script>
+function enviarMensaje() {
+    alert("Tu compra ha sido generada con exito, te llegara un correo de confirmacion con los datos y el dia estimado de entrega");
+    document.getElementById("formContacto").reset(); // Limpia todo el formulario
+}
+</script>
+
+
+    </div>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<footer id=contacto>
+	<div class="contenedor footer-content">
+    <p>Clothe's Online © 2025</p>
+	</div>
+    <div class="social-media">
+        <a href="#"><i class='bx bxl-facebook'></i></a>
+        <a href="#"><i class='bx bxl-instagram'></i></a>
+    </div>
+</footer>
+
+<!-- ========== SCRIPTS ========== -->
+<script>
+    function abrirMenu() {
+        document.getElementById("menu").style.width = "260px";
+    }
+
+    function cerrarMenu() {
+        document.getElementById("menu").style.width = "0";
+    }
+
+    function toggleSubmenu() {
+        let submenu = document.getElementById("submenu");
+        let flecha = document.getElementById("flecha");
+
+        if (submenu.style.maxHeight) {
+            submenu.style.maxHeight = null;
+            flecha.classList.remove("rotar");
+        } else {
+            submenu.style.maxHeight = submenu.scrollHeight + "px";
+            flecha.classList.add("rotar");
+        }
+    }
+</script>
+
+</body>
+</html>

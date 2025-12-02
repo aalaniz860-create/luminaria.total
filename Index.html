@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Luminaria Total</title>
+	<meta charset="utf-8">
+	<meta name="ilse" content="wght=decervice">
+	<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+	<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="estilo.css">
+</head>
+<body>
+<div id="chat-ia-boton">💬</div>
+
+<div id="chat-ia-ventana">
+  <div id="chat-ia-header">Asistente IA</div>
+  <div id="chat-ia-contenido"></div>
+  <input id="chat-ia-input" type="text" placeholder="Escribe tu pregunta..." />
+</div>
+
+<!-- Botón que abre el menú -->
+<i class='bx bx-menu menu-btn' onclick="abrirMenu()"></i>
+
+<div id="menu" class="menu">
+
+    <a href="javascript:void(0)" onclick="cerrarMenu()">Cerrar ✖</a>
+
+    <a href="index.html">Inicio</a>
+
+     <a href="lamparas.html">Lamparas</a>
+
+        <i id="flecha" class='bx bx-chevron-right flecha'></i>
+    </a>
+
+    
+
+    <a href="contacto.html">Contacto</a>
+</div>
+
+<script>
+    function abrirMenu() {
+        document.getElementById("menu").style.width = "260px";
+    }
+
+    function cerrarMenu() {
+        document.getElementById("menu").style.width = "0";
+    }
+
+    function toggleSubmenu() {
+        let submenu = document.getElementById("submenu");
+        let flecha = document.getElementById("flecha");
+
+        if (submenu.style.maxHeight) {
+            submenu.style.maxHeight = null;
+            flecha.classList.remove("rotar");
+        } else {
+            submenu.style.maxHeight = submenu.scrollHeight + "px";
+            flecha.classList.add("rotar");
+        }
+    }
+</script>
+	<div class="contenedor head">
+	<h1 class="titulo">Luminaria Total</h1>
+	<p class="copy">"Luz que protege y dura"</p>
+	</header>
+</div>
+<main>
+	<section class="services contenedor" id="Servicios">
+	<h2 class="subtitulo">Luminaria Total</h2>
+	<div class="contenedor-servicio">
+
+	<div class="checklist-servicio">
+		<div class="service">
+			<h3 class="n-service"><span class="number">1</span>Quienes Somos</h3>
+			<p>Somos una compañía especializada en la venta, instalación y reparación de lámparas suburbanas y sistemas de iluminación exterior. Desde nuestros inicios, hemos trabajado con el compromiso de ofrecer soluciones duraderas, seguras y eficientes para alumbrar calles, fraccionamientos, industrias y espacios públicos</p>
+		</div>
+		<div class="service">
+			<h3 class="n-service"><span class="number">2</span>Objetivo</h3>
+			<p>Brindar soluciones integrales de iluminación exterior mediante la venta, instalación y reparación de lámparas suburbanas, garantizando productos de alta calidad, atención especializada y un servicio técnico confiable que contribuya a la seguridad, eficiencia y desarrollo de las comunidades y espacios públicos</p>
+		</div>
+	</div>
+	</div>	
+	</section>
+
+			<section class="contenedor" id="expertos">
+				<h2 class="subtitulo">Luminaria Total</h2>
+				<section class="experts">
+					<div class="cont-expert">
+						<img src="img/pago.png">
+						<h3 class="n-expert"> Precios accesibles</h3>
+					</div>
+					<div class="cont-expert">
+						<img src="img/repa.png">
+						<h3 class="n-expert">Reparaciones Garantizadas</h3>
+					</div>
+					<div class="cont-expert">
+						<img src="img/tec.jpg">
+						<h3 class="n-expert">Contamos con personal capacitado</h3>
+					</div>
+				</section>
+				</section>
+</main>
+<footer id=contacto>
+	<div class="contenedor footer-content">
+		<h2 class="brand">Luminaria Total</h2>
+		<p>"Luz que protege y dura"</p>
+	</div>
+	<div class="social-media">
+		<a href="https://www.facebook.com/share/17c6cZKU8D/?mibextid=wwXIfr " class="social-media-icon">
+			<i class='bx bxl-facebook'></i>
+		</a>
+	</div>
+	<div class="social-media">
+		<a href="https://www.instagram.com/luminaria_total?igsh=bjZ6Nms5cDlvd3cw&utm_source=qr " class="social-media-icon">
+		<i class='bx bxl-instagram' ></i>
+		</a>
+	</div>
+</footer>
+<script>
+const API_KEY = "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";
+
+document.getElementById("chat-ia-boton").onclick = () => {
+  const ventana = document.getElementById("chat-ia-ventana");
+  ventana.style.display = ventana.style.display === "flex" ? "none" : "flex";
+};
+
+async function enviarMensajeIA(mensaje) {
+  const contenidoSitio = document.body.innerText;
+
+  const respuesta = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + API_KEY
+    },
+    body: JSON.stringify({
+      model: "gpt-4.1",
+      messages: [
+        {
+          role: "system",
+          content: "Eres un asistente que responde únicamente sobre el contenido del sitio web del usuario."
+        },
+        {
+          role: "user",
+          content: "Contenido del sitio:\n" + contenidoSitio
+        },
+        {
+          role: "user",
+          content: mensaje
+        }
+      ]
+    })
+  });
+
+  const data = await respuesta.json();
+  return data.choices[0].message.content;
+}
+
+document.getElementById("chat-ia-input").addEventListener("keypress", async (e) => {
+  if (e.key === "Enter") {
+    const input = document.getElementById("chat-ia-input");
+    const mensaje = input.value;
+    input.value = "";
+
+    const chat = document.getElementById("chat-ia-contenido");
+    chat.innerHTML += `<p><b>Tú:</b> ${mensaje}</p>`;
+
+    const respuestaIA = await enviarMensajeIA(mensaje);
+    chat.innerHTML += `<p><b>IA:</b> ${respuestaIA}</p>`;
+
+    chat.scrollTop = chat.scrollHeight;
+  }
+});
+</script>
+
+
+</body>
+<script src="menuu.js"></script>
+<script src="lightbox.js"></script>
+</html>

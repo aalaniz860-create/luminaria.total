@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Luminaria Total</title>
+	<meta charset="utf-8">
+	<meta name="ilse" content="wght=decervice">
+	<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+	<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="estilo.css">
+</head>
+<body>
+<!-- Botón que abre el menú -->
+<i class='bx bx-menu menu-btn' onclick="abrirMenu()"></i>
+
+<div id="menu" class="menu">
+
+    <a href="javascript:void(0)" onclick="cerrarMenu()">Cerrar ✖</a>
+
+    <a href="index.html">Inicio</a>
+
+    <a href="lamparas.html">Lamparas</a>
+        <i id="flecha" class='bx bx-chevron-right flecha'></i>
+    </a>
+
+    <a href="contacto.html">Contacto</a>
+</div>
+
+<script>
+    function abrirMenu() {
+        document.getElementById("menu").style.width = "260px";
+    }
+
+    function cerrarMenu() {
+        document.getElementById("menu").style.width = "0";
+    }
+
+    function toggleSubmenu() {
+        let submenu = document.getElementById("submenu");
+        let flecha = document.getElementById("flecha");
+
+        if (submenu.style.maxHeight) {
+            submenu.style.maxHeight = null;
+            flecha.classList.remove("rotar");
+        } else {
+            submenu.style.maxHeight = submenu.scrollHeight + "px";
+            flecha.classList.add("rotar");
+        }
+    }
+</script>
+	<div class="contenedor head">
+	<h1 class="titulo">Luminaria Total</h1>
+	<p class="copy">Aqui encontraras alguno de nuestros productos</p>
+	</header>
+</div>
+<main>
+	<section class="services contenedor" id="Servicios">
+	<h2 class="subtitulo">Luminaria Total</h2>
+	<div class="contenedor-servicio">
+	<div class="checklist-servicio">
+		<div class="service">
+			<h3 class="n-service"><span class="number">1</span>Lamparas</h3>
+			<p>Luminaria Total, cuenta con la mejor calidad de lamparas, checa nuestra galeria y te aseguro que una te va a gustar, contamos con varios modelos</p>
+</div>
+	</div>	
+	</section>
+	<section class="gallery" id="portafolio">
+    <div class="contenedor">
+        <h2 class="subtitulo">Galeria</h2>	
+        
+        <div class="contenedor-galeria">
+
+            <div class="item-galeria">
+                <img src="img/lamp.png" class="img-galeria">
+                <div class="botones">
+                    <a href="compra.html" class="btn-comprar">Comprar ahora</a>
+                    <button class="btn-carrito">Agregar al carrito</button>
+                </div>
+            </div>
+
+            <div class="item-galeria">
+                <img src="img/lamp2.jpg" class="img-galeria">
+                <div class="botones">
+                    <a href="compra.html" class="btn-comprar">Comprar ahora</a>
+                    <button class="btn-carrito">Agregar al carrito</button>
+                </div>
+            </div>
+
+            <div class="item-galeria">
+                <img src="img/lamp3.jpg" class="img-galeria">
+                <div class="botones">
+                    <a href="compra.html" class="btn-comprar">Comprar ahora</a>
+                    <button class="btn-carrito">Agregar al carrito</button>
+                </div>
+            </div>
+
+            <div class="item-galeria">
+                <img src="img/lamp4.jpg" class="img-galeria">
+                <div class="botones">
+                    <a href="compra.html" class="btn-comprar">Comprar ahora</a>
+                    <button class="btn-carrito">Agregar al carrito</button>
+                </div>
+            </div>
+
+            <div class="item-galeria">
+                <img src="img/lamp5.png" class="img-galeria">
+                <div class="botones">
+                    <a href="compra.html" class="btn-comprar">Comprar ahora</a>
+                    <button class="btn-carrito">Agregar al carrito</button>
+                </div>
+            </div>
+
+            <div class="item-galeria">
+                <img src="img/lamp6.png" class="img-galeria">
+                <div class="botones">
+                    <a href="compra.html" class="btn-comprar">Comprar ahora</a>
+                    <button class="btn-carrito">Agregar al carrito</button>
+                </div>
+            </div>
+
+            <div class="item-galeria">
+                <img src="img/lam7.png" class="img-galeria">
+                <div class="botones">
+                    <a href="compra.html" class="btn-comprar">Comprar ahora</a>
+                    <button class="btn-carrito">Agregar al carrito</button>
+                </div>
+            </div>
+
+            <div class="item-galeria">
+                <img src="img/lamp7.jpg" class="img-galeria">
+                <div class="botones">
+                    <a href="compra.html" class="btn-comprar">Comprar ahora</a>
+                    <button class="btn-carrito">Agregar al carrito</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+		<section class="imagen-light">
+			
+			</section>
+			<section class="contenedor" id="expertos">
+				<h2 class="subtitulo">Informacion General</h2>
+				<section class="experts">
+					<div class="cont-expert">
+						<img src="img/pago.png">
+						<h3 class="n-expert"> Precios accesibles</h3>
+					</div>
+					<div class="cont-expert">
+						<img src="img/repa.png">
+						<h3 class="n-expert">Reparaciones Garantizadas</h3>
+					</div>
+					<div class="cont-expert">
+						<img src="img/tec.jpg">
+						<h3 class="n-expert">Contamos con personal capacitado</h3>
+					</div>
+				</section>
+				</section>
+</main>
+<footer id=contacto>
+	<div class="contenedor footer-content">
+		<h2 class="brand">Luminaria Total</h2>
+		<p>Con nosotros encontraras la mejor calidad de lamparas</p>
+	</div>
+	</div>
+	<div class="social-media">
+		<a href="https://www.facebook.com/share/17c6cZKU8D/?mibextid=wwXIfr " class="social-media-icon">
+			<i class='bx bxl-facebook'></i>
+		</a>
+	</div>
+	<div class="social-media">
+		<a href="https://www.instagram.com/luminaria_total?igsh=bjZ6Nms5cDlvd3cw&utm_source=qr " class="social-media-icon">
+		<i class='bx bxl-instagram' ></i>
+		</a>
+	</div>
+</footer>
+
+</body>
+<script src="menuu.js"></script>
+<script src="lightbox.js"></script>
+</html>
