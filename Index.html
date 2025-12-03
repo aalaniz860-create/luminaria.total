@@ -123,7 +123,17 @@
 	</div>
 </footer>
 <script>
+// Mostrar / ocultar chatbot
+document.getElementById("chatbot-btn").onclick = () => {
+    const win = document.getElementById("chatbot-window");
+    win.style.display = win.style.display === "flex" ? "none" : "flex";
+};
 
+// Enviar mensaje
+document.getElementById("chatbot-send").onclick = sendMessage;
+document.getElementById("chatbot-input").addEventListener("keypress", e => {
+    if (e.key === "Enter") sendMessage();
+});
 </script>
 
 
@@ -132,6 +142,7 @@
 <script src="lightbox.js"></script>
 
 </html>
+
 
 
 
