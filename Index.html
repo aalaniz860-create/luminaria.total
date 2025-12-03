@@ -26,33 +26,69 @@
 
 
 <script>
-  // ELEMENTOS
+  /*********************************
+   *     1) CONFIGURAR TU SITIO    *
+   *********************************/
+  const SITE_URL = "https://aalaniz860-create.github.io/luminaria.total/Index.html"; // ← CAMBIA ESTA URL
+
+  let siteText = "";  // Aquí guardaremos el texto de la web
+
+
+  /*********************************
+   *  2) CARGAR TEXTO DEL SITIO    *
+   *********************************/
+  async function loadSiteContent() {
+    output.innerHTML = "Cargando contenido del sitio...";
+
+    try {
+      const res = await fetch(SITE_URL);
+      const html = await res.text();
+
+      // Convertir HTML a solo texto
+      siteText = html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ");
+
+      output.innerHTML = "Modelo cargando...";
+    }
+    catch (e) {
+      siteText = "";
+      output.innerHTML = "No se pudo leer el sitio (CORS bloqueado).";
+    }
+  }
+
+
+  /*********************************
+   *    3) BOTÓN Y ELEMENTOS UI    *
+   *********************************/
   const floatBtn = document.getElementById("chat-float-btn");
   const chatWindow = document.getElementById("chat-window");
   const output = document.getElementById("chat-output");
   const input = document.getElementById("chat-message");
   const sendBtn = document.getElementById("send-btn");
 
-  // ABRIR / CERRAR CHAT
   floatBtn.onclick = () => {
     chatWindow.style.display = chatWindow.style.display === "flex" ? "none" : "flex";
   };
 
-  // IA LOCAL
+
+  /*********************************
+   *      4) INICIALIZAR IA        *
+   *********************************/
   const chat = new webllm.ChatModule();
   let ready = false;
 
-  // INICIALIZAR MODELO
-  (async () => {
-    output.innerHTML = "Cargando modelo IA (puede tardar unos segundos)...";
+  async function initModel() {
+    output.innerHTML = "Cargando IA local (puede tardar)...";
 
     await chat.loadModel("TinyLlama-1.1B-Chat-v0.3-q4f32_1");
 
     ready = true;
-    output.innerHTML = "Modelo listo. ¡Pregúntame algo!";
-  })();
+    output.innerHTML = "Listo. Pregunta algo sobre el sitio.";
+  }
 
-  // FUNCIÓN PARA ENVIAR MENSAJES
+
+  /*********************************
+   *       5) ENVIAR MENSAJE       *
+   *********************************/
   async function sendMessage() {
     const message = input.value.trim();
     if (!message) return;
@@ -67,20 +103,40 @@
 
     input.value = "";
 
+    // Prompt especializado en el sitio
+    const prompt = `
+Eres un asistente experto que responde exclusivamente con información del siguiente sitio:
+
+=== CONTENIDO DEL SITIO ===
+${siteText}
+===========================
+
+Si la respuesta no aparece en el sitio, responde  
+"⚠ No tengo datos sobre eso en el sitio."
+
+Pregunta del usuario: ${message}
+`;
+
     // Generar respuesta IA
-    const reply = await chat.generate(message);
+    const reply = await chat.generate(prompt);
 
     output.innerHTML += `<br><b>IA:</b> ${reply}`;
     output.scrollTop = output.scrollHeight;
   }
 
-  // CLICK ENVIAR
   sendBtn.onclick = sendMessage;
-
-  // ENTER PARA ENVIAR
   input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") sendMessage();
   });
+
+
+  /*********************************
+   *   6) INICIALIZAR TODO         *
+   *********************************/
+  (async () => {
+    await loadSiteContent();
+    await initModel();
+  })();
 </script>
 
 
@@ -191,6 +247,7 @@
 <script src="lightbox.js"></script>
 
 </html>
+
 
 
 
