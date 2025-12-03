@@ -135,78 +135,55 @@ document.getElementById("chatbot-input").addEventListener("keypress", e => {
     if (e.key === "Enter") sendMessage();
 });
 
-function sendMessage() {
-    const input = document.getElementById("chatbot-input");
-    const text = input.value.trim();
-    if (!text) return;
+ const input = document.getElementById('chat-input');
+  const body = document.getElementById('chat-body');
+  const button = document.getElementById('send-btn');
+  const header = document.getElementById('chat-header');
+  const container = document.getElementById('chat-container');
 
-    addMessage(text, "user");
-    input.value = "";
+  // Minimizar/maximizar chat
+  header.addEventListener('click', () => {
+    if (body.style.display === 'none') {
+      body.style.display = 'block';
+      container.querySelector('#chat-footer').style.display = 'flex';
+    } else {
+      body.style.display = 'none';
+      container.querySelector('#chat-footer').style.display = 'none';
+    }
+  });
 
-    const response = generateLogicalResponse(text);
-    setTimeout(() => addMessage(response, "bot"), 400);
-}
+  button.addEventListener('click', sendMessage);
+  input.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage();
+  });
 
-// ---- Añadir mensajes al chat ----
-function addMessage(text, type) {
-    const box = document.getElementById("chatbot-messages");
-    const div = document.createElement("div");
-    div.className = type === "user" ? "message-user" : "message-bot";
+  async function sendMessage() {
+    const message = input.value.trim();
+    if (!message) return;
+    appendMessage('user', message);
+    input.value = '';
+    body.scrollTop = body.scrollHeight;
+
+    try {
+      const res = await fetch('http://localhost:3000/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      });
+      const data = await res.json();
+      appendMessage('ai', data.reply);
+      body.scrollTop = body.scrollHeight;
+    } catch (err) {
+      appendMessage('ai', 'Error al conectarse al servidor.');
+    }
+  }
+
+  function appendMessage(sender, text) {
+    const div = document.createElement('div');
+    div.classList.add('message', sender);
     div.textContent = text;
-    box.appendChild(div);
-    box.scrollTop = box.scrollHeight;
-}
-
-// ---- Procesamiento del contenido de la página ----
-function getPageParagraphs() {
-    const text = document.body.innerText
-        .replace(/\s+/g, " ")
-        .trim();
-
-    return text.split(/[\.\!\?]\s+/); // divide en frases/parrafos
-}
-
-// ---- Calcular coincidencia difusa entre dos textos ----
-function similarity(a, b) {
-    const wordsA = a.toLowerCase().split(" ");
-    const wordsB = b.toLowerCase().split(" ");
-
-    let hits = 0;
-
-    for (const w of wordsA) {
-        if (wordsB.includes(w)) hits++;
-    }
-
-    return hits / Math.max(wordsA.length, wordsB.length);
-}
-
-// ---- Generar respuesta lógica basada en contenido ----
-function generateLogicalResponse(question) {
-    const paragraphs = getPageParagraphs();
-
-    let bestMatch = "";
-    let bestScore = 0;
-
-    paragraphs.forEach(p => {
-        const score = similarity(question, p);
-        if (score > bestScore) {
-            bestScore = score;
-            bestMatch = p;
-        }
-    });
-
-    // Si se encontró algo razonable
-    if (bestScore > 0.1) {
-        return (
-            "Según el contenido de la página, esto puede ayudarte:\n\n" +
-            bestMatch.trim() +
-            "."
-        );
-    }
-
-    // Si no encuentra nada relacionado
-    return "No encontré información específica sobre eso en esta página, pero puedo intentar responder si reformulas tu pregunta.";
-}
+    body.appendChild(div);
+  }
 </script>
 
 
@@ -215,6 +192,7 @@ function generateLogicalResponse(question) {
 <script src="lightbox.js"></script>
 
 </html>
+
 
 
 
