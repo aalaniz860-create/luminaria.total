@@ -134,6 +134,65 @@ document.getElementById("chatbot-send").onclick = sendMessage;
 document.getElementById("chatbot-input").addEventListener("keypress", e => {
     if (e.key === "Enter") sendMessage();
 });
+	const output = document.getElementById("output");
+    const SITE_URL = "https://aalaniz860-create.github.io/luminaria.total/Index.html"; // <-- Cambia esto
+
+    const chat = new webllm.ChatModule();
+    let ready = false;
+    let siteText = "";
+
+    async function loadSite() {
+      output.innerHTML = "Cargando contenido del sitio...";
+      try {
+        const res = await fetch(SITE_URL);
+        const html = await res.text();
+
+        // Extrae solo texto del HTML
+        siteText = html.replace(/<[^>]*>?/gm, ' ').replace(/\s+/g, ' ');
+
+        output.innerHTML = "Contenido del sitio cargado.";
+      } catch (e) {
+        output.innerHTML = "No se pudo cargar el sitio (CORS bloqueado).";
+      }
+    }
+
+    async function initModel() {
+      output.innerHTML += "<br>Cargando modelo IA...";
+      await chat.loadModel("TinyLlama-1.1B-Chat-v0.3-q4f32_1");
+      ready = true;
+
+      output.innerHTML += "<br>Modelo listo.";
+    }
+
+    // Inicialización
+    (async () => {
+      await loadSite();
+      await initModel();
+    })();
+
+    document.getElementById("send").onclick = async () => {
+      if (!ready) return;
+
+      const question = document.getElementById("prompt").value;
+
+      const prompt = `
+Eres un asistente experto en el siguiente sitio web.
+
+=== CONTENIDO DEL SITIO ===
+${siteText}
+===========================
+
+Responde únicamente usando información del sitio.  
+Si no está en el sitio, responde: "No tengo datos sobre eso en el sitio."
+      
+Pregunta: ${question}
+`;
+
+      output.innerHTML = "Pensando...";
+
+      const reply = await chat.generate(prompt);
+      output.innerHTML = reply;
+    };
 </script>
 
 
@@ -142,6 +201,7 @@ document.getElementById("chatbot-input").addEventListener("keypress", e => {
 <script src="lightbox.js"></script>
 
 </html>
+
 
 
 
