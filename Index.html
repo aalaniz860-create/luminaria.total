@@ -9,12 +9,15 @@
 	<link rel="stylesheet" type="text/css" href="estilo.css">
 </head>
 <body>
-<div id="chat-ia-boton">💬</div>
+<div id="chatbot-btn">💬</div>
 
-<div id="chat-ia-ventana">
-  <div id="chat-ia-header">Asistente IA</div>
-  <div id="chat-ia-contenido"></div>
-  <input id="chat-ia-input" type="text" placeholder="Escribe tu pregunta..." />
+<div id="chatbot-window">
+    <div id="chatbot-header">Asistente</div>
+    <div id="chatbot-messages"></div>
+    <div id="chatbot-input-area">
+        <input type="text" id="chatbot-input" placeholder="Escribe tu pregunta...">
+        <button id="chatbot-send">Enviar</button>
+    </div>
 </div>
 
 <!-- Botón que abre el menú -->
@@ -182,4 +185,5 @@ document.getElementById("chat-ia-input").addEventListener("keypress", async (e) 
 <script src="lightbox.js"></script>
 
 </html>
+
 
