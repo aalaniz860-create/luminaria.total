@@ -9,6 +9,65 @@
 	<link rel="stylesheet" type="text/css" href="estilo.css">
 </head>
 <body>
+	<!-- BOTÓN FLOTANTE -->
+<button id="chat-float-btn">💬</button>
+
+<!-- VENTANA DE CHAT -->
+<div id="chat-window">
+  <div id="chat-header">Asistente IA</div>
+
+  <div id="chat-output">Hola 👋 ¿En qué puedo ayudarte?</div>
+
+  <div id="chat-input">
+    <input id="chat-message" type="text" placeholder="Escribe tu pregunta...">
+    <button id="send-btn">Enviar</button>
+  </div>
+</div>
+
+
+<!-- ================== LÓGICA DEL CHAT ================== -->
+<script src="https://cdn.jsdelivr.net/npm/@mlc-ai/web-llm/dist/index.js"></script>
+<script>
+
+  // Mostrar / ocultar ventana del chat
+  const floatBtn = document.getElementById("chat-float-btn");
+  const chatWindow = document.getElementById("chat-window");
+  const output = document.getElementById("chat-output");
+  const input = document.getElementById("chat-message");
+
+  floatBtn.onclick = () => {
+    chatWindow.style.display = chatWindow.style.display === "flex" ? "none" : "flex";
+  };
+
+  // Cargar modelo IA local
+  const chat = new webllm.ChatModule();
+  let ready = false;
+
+  async function init() {
+    output.innerHTML = "Cargando modelo IA...";
+
+    await chat.loadModel("TinyLlama-1.1B-Chat-v0.3-q4f32_1");
+
+    ready = true;
+    output.innerHTML = "Modelo listo. ¿Qué deseas saber?";
+  }
+
+  init();
+
+  // Enviar pregunta
+  document.getElementById("send-btn").onclick = async () => {
+    const msg = input.value.trim();
+    if (!msg || !ready) return;
+
+    output.innerHTML += `<br><b>Tú:</b> ${msg}`;
+    input.value = "";
+
+    const reply = await chat.generate(msg);
+
+    output.innerHTML += `<br><b>IA:</b> ${reply}`;
+    output.scrollTop = output.scrollHeight;
+  };
+</script>
 
 
 <!-- Botón que abre el menú -->
@@ -113,72 +172,12 @@
 		</a>
 	</div>
 </footer>
-<!-- BOTÓN FLOTANTE -->
-<button id="chat-float-btn">💬</button>
-
-<!-- VENTANA DE CHAT -->
-<div id="chat-window">
-  <div id="chat-header">Asistente IA</div>
-
-  <div id="chat-output">Hola 👋 ¿En qué puedo ayudarte?</div>
-
-  <div id="chat-input">
-    <input id="chat-message" type="text" placeholder="Escribe tu pregunta...">
-    <button id="send-btn">Enviar</button>
-  </div>
-</div>
-
-
-<!-- ================== LÓGICA DEL CHAT ================== -->
-<script src="https://aalaniz860-create.github.io/luminaria.total/Index.html"></script>
-<script>
-
-  // Mostrar / ocultar ventana del chat
-  const floatBtn = document.getElementById("chat-float-btn");
-  const chatWindow = document.getElementById("chat-window");
-  const output = document.getElementById("chat-output");
-  const input = document.getElementById("chat-message");
-
-  floatBtn.onclick = () => {
-    chatWindow.style.display = chatWindow.style.display === "flex" ? "none" : "flex";
-  };
-
-  // Cargar modelo IA local
-  const chat = new webllm.ChatModule();
-  let ready = false;
-
-  async function init() {
-    output.innerHTML = "Cargando modelo IA...";
-
-    await chat.loadModel("TinyLlama-1.1B-Chat-v0.3-q4f32_1");
-
-    ready = true;
-    output.innerHTML = "Modelo listo. ¿Qué deseas saber?";
-  }
-
-  init();
-
-  // Enviar pregunta
-  document.getElementById("send-btn").onclick = async () => {
-    const msg = input.value.trim();
-    if (!msg || !ready) return;
-
-    output.innerHTML += `<br><b>Tú:</b> ${msg}`;
-    input.value = "";
-
-    const reply = await chat.generate(msg);
-
-    output.innerHTML += `<br><b>IA:</b> ${reply}`;
-    output.scrollTop = output.scrollHeight;
-  };
-</script>
-
-
 </body>
 <script src="menuu.js"></script>
 <script src="lightbox.js"></script>
 
 </html>
+
 
 
 
