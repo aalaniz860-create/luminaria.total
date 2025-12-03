@@ -122,77 +122,64 @@
 		</a>
 	</div>
 </footer>
+<!-- BOTÓN FLOTANTE -->
+<button id="chat-float-btn">💬</button>
+
+<!-- VENTANA DE CHAT -->
+<div id="chat-window">
+  <div id="chat-header">Asistente IA</div>
+
+  <div id="chat-output">Hola 👋 ¿En qué puedo ayudarte?</div>
+
+  <div id="chat-input">
+    <input id="chat-message" type="text" placeholder="Escribe tu pregunta...">
+    <button id="send-btn">Enviar</button>
+  </div>
+</div>
+
+
+<!-- ================== LÓGICA DEL CHAT ================== -->
+<script src="https://aalaniz860-create.github.io/luminaria.total/Index.html"></script>
 <script>
-// Mostrar / ocultar chatbot
-document.getElementById("chatbot-btn").onclick = () => {
-    const win = document.getElementById("chatbot-window");
-    win.style.display = win.style.display === "flex" ? "none" : "flex";
-};
 
-// Enviar mensaje
-document.getElementById("chatbot-send").onclick = sendMessage;
-document.getElementById("chatbot-input").addEventListener("keypress", e => {
-    if (e.key === "Enter") sendMessage();
-});
-	const output = document.getElementById("output");
-    const SITE_URL = "https://aalaniz860-create.github.io/luminaria.total/Index.html"; // <-- Cambia esto
+  // Mostrar / ocultar ventana del chat
+  const floatBtn = document.getElementById("chat-float-btn");
+  const chatWindow = document.getElementById("chat-window");
+  const output = document.getElementById("chat-output");
+  const input = document.getElementById("chat-message");
 
-    const chat = new webllm.ChatModule();
-    let ready = false;
-    let siteText = "";
+  floatBtn.onclick = () => {
+    chatWindow.style.display = chatWindow.style.display === "flex" ? "none" : "flex";
+  };
 
-    async function loadSite() {
-      output.innerHTML = "Cargando contenido del sitio...";
-      try {
-        const res = await fetch(SITE_URL);
-        const html = await res.text();
+  // Cargar modelo IA local
+  const chat = new webllm.ChatModule();
+  let ready = false;
 
-        // Extrae solo texto del HTML
-        siteText = html.replace(/<[^>]*>?/gm, ' ').replace(/\s+/g, ' ');
+  async function init() {
+    output.innerHTML = "Cargando modelo IA...";
 
-        output.innerHTML = "Contenido del sitio cargado.";
-      } catch (e) {
-        output.innerHTML = "No se pudo cargar el sitio (CORS bloqueado).";
-      }
-    }
+    await chat.loadModel("TinyLlama-1.1B-Chat-v0.3-q4f32_1");
 
-    async function initModel() {
-      output.innerHTML += "<br>Cargando modelo IA...";
-      await chat.loadModel("TinyLlama-1.1B-Chat-v0.3-q4f32_1");
-      ready = true;
+    ready = true;
+    output.innerHTML = "Modelo listo. ¿Qué deseas saber?";
+  }
 
-      output.innerHTML += "<br>Modelo listo.";
-    }
+  init();
 
-    // Inicialización
-    (async () => {
-      await loadSite();
-      await initModel();
-    })();
+  // Enviar pregunta
+  document.getElementById("send-btn").onclick = async () => {
+    const msg = input.value.trim();
+    if (!msg || !ready) return;
 
-    document.getElementById("send").onclick = async () => {
-      if (!ready) return;
+    output.innerHTML += `<br><b>Tú:</b> ${msg}`;
+    input.value = "";
 
-      const question = document.getElementById("prompt").value;
+    const reply = await chat.generate(msg);
 
-      const prompt = `
-Eres un asistente experto en el siguiente sitio web.
-
-=== CONTENIDO DEL SITIO ===
-${siteText}
-===========================
-
-Responde únicamente usando información del sitio.  
-Si no está en el sitio, responde: "No tengo datos sobre eso en el sitio."
-      
-Pregunta: ${question}
-`;
-
-      output.innerHTML = "Pensando...";
-
-      const reply = await chat.generate(prompt);
-      output.innerHTML = reply;
-    };
+    output.innerHTML += `<br><b>IA:</b> ${reply}`;
+    output.scrollTop = output.scrollHeight;
+  };
 </script>
 
 
@@ -201,6 +188,7 @@ Pregunta: ${question}
 <script src="lightbox.js"></script>
 
 </html>
+
 
 
 
