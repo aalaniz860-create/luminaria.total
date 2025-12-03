@@ -459,3 +459,8 @@ line-height: 60px;
   width: 100%;
   outline: none;
 }
+.texto-fijo {
+    font-size: 14px;
+    color: #555;
+}
+
