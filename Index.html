@@ -123,61 +123,48 @@
 	</div>
 </footer>
 <script>
-const API_KEY = "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";
-
-document.getElementById("chat-ia-boton").onclick = () => {
-  const ventana = document.getElementById("chat-ia-ventana");
-  ventana.style.display = ventana.style.display === "flex" ? "none" : "flex";
+// Mostrar / ocultar chatbot
+document.getElementById("chatbot-btn").onclick = () => {
+    const win = document.getElementById("chatbot-window");
+    win.style.display = win.style.display === "flex" ? "none" : "flex";
 };
 
-async function enviarMensajeIA(mensaje) {
-  const contenidoSitio = document.body.innerText;
+// Enviar mensaje
+document.getElementById("chatbot-send").onclick = sendMessage;
+document.getElementById("chatbot-input").addEventListener("keypress", e => {
+    if (e.key === "Enter") sendMessage();
+});
 
-  const respuesta = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + API_KEY
-    },
-    body: JSON.stringify({
-      model: "gpt-4.1",
-      messages: [
-        {
-          role: "system",
-          content: "Eres un asistente que responde únicamente sobre el contenido del sitio web del usuario."
-        },
-        {
-          role: "user",
-          content: "Contenido del sitio:\n" + contenidoSitio
-        },
-        {
-          role: "user",
-          content: mensaje
-        }
-      ]
-    })
-  });
+function sendMessage() {
+    const input = document.getElementById("chatbot-input");
+    const text = input.value.trim();
+    if (!text) return;
 
-  const data = await respuesta.json();
-  return data.choices[0].message.content;
-}
-
-document.getElementById("chat-ia-input").addEventListener("keypress", async (e) => {
-  if (e.key === "Enter") {
-    const input = document.getElementById("chat-ia-input");
-    const mensaje = input.value;
+    addMessage(text, "user");
     input.value = "";
 
-    const chat = document.getElementById("chat-ia-contenido");
-    chat.innerHTML += `<p><b>Tú:</b> ${mensaje}</p>`;
+    const response = generateResponse(text);
+    setTimeout(() => addMessage(response, "bot"), 500);
+}
 
-    const respuestaIA = await enviarMensajeIA(mensaje);
-    chat.innerHTML += `<p><b>IA:</b> ${respuestaIA}</p>`;
+// Añadir mensajes al chat
+function addMessage(text, type) {
+    const container = document.getElementById("chatbot-messages");
+    const div = document.createElement("div");
+    div.className = type === "user" ? "message-user" : "message-bot";
+    div.textContent = text;
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+}
 
-    chat.scrollTop = chat.scrollHeight;
-  }
-});
-</script>
+// Lógica básica del chatbot basada en el contenido de la página
+function generateResponse(question) {
+    const pageText = document.body.innerText.toLowerCase();
+    const q = question.toLowerCase();
+
+    // Busca palabras clave
+    if (pageText.includes(q)) {
+        /
 
 
 </body>
@@ -185,5 +172,6 @@ document.getElementById("chat-ia-input").addEventListener("keypress", async (e) 
 <script src="lightbox.js"></script>
 
 </html>
+
 
 
