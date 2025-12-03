@@ -164,7 +164,15 @@ function generateResponse(question) {
 
     // Busca palabras clave
     if (pageText.includes(q)) {
-        /
+        // Extrae una frase relevante cercana
+        const idx = pageText.indexOf(q);
+        const snippet = pageText.substring(idx, idx + 180);
+        return "Esto encontré en la página:\n\n" + snippet + "...";
+    }
+
+    return "No pude encontrar información sobre eso en esta página. ¿Puedes intentar con otra pregunta?";
+}
+</script>
 
 
 </body>
@@ -172,6 +180,7 @@ function generateResponse(question) {
 <script src="lightbox.js"></script>
 
 </html>
+
 
 
 
