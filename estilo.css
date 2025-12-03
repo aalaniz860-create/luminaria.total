@@ -409,55 +409,79 @@ line-height: 60px;
 .btn-carrito:hover {
     background-color: #3e8f43;
 }
-#chat-ia-boton {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #4A90E2;
-  color: white;
-  padding: 15px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 22px;
-  box-shadow: 0 4px 10px rgba(0,0,0,.3);
+#chatbot-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #007bff;
+    color: white;
+    padding: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 22px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 9999;
 }
 
-#chat-ia-ventana {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  width: 300px;
-  height: 380px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0,0,0,.3);
-  display: none;
-  flex-direction: column;
-  overflow: hidden;
+#chatbot-window {
+    width: 320px;
+    height: 420px;
+    background: white;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9999;
 }
 
-#chat-ia-header {
-  background: #4A90E2;
-  color: white;
-  padding: 12px;
-  font-weight: bold;
-  text-align: center;
+#chatbot-header {
+    background: #007bff;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
 }
 
-#chat-ia-contenido {
-  flex: 1;
-  padding: 10px;
-  overflow-y: auto;
-  font-family: Arial;
-  font-size: 14px;
+#chatbot-messages {
+    padding: 10px;
+    flex-grow: 1;
+    overflow-y: auto;
+    font-family: Arial;
+    font-size: 14px;
 }
 
-#chat-ia-input {
-  border: none;
-  padding: 10px;
-  border-top: 1px solid #ddd;
-  width: 100%;
-  outline: none;
+.message-user {
+    text-align: right;
+    margin: 5px 0;
+    color: #007bff;
+}
+
+.message-bot {
+    text-align: left;
+    margin: 5px 0;
+    color: #333;
+}
+
+#chatbot-input-area {
+    display: flex;
+    border-top: 1px solid #ddd;
+}
+
+#chatbot-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+}
+
+#chatbot-send {
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 .descripcion {
     margin: 10px 0;
@@ -469,5 +493,6 @@ line-height: 60px;
 .descripcion li {
     margin-bottom: 4px;
 }
+
 
 
