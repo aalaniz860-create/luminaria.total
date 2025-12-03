@@ -420,80 +420,78 @@ line-height: 60px;
 .descripcion li {
     margin-bottom: 4px;
 }
-#chatbot-btn {
+#chat-float-btn {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: #007bff;
-    color: white;
-    padding: 16px;
+    width: 60px;
+    height: 60px;
+    background: #4A6CFF;
     border-radius: 50%;
+    color: white;
+    font-size: 28px;
+    border: none;
     cursor: pointer;
-    font-size: 22px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    transition: transform 0.2s;
     z-index: 9999;
-}
+  }
 
-#chatbot-window {
-    width: 320px;
+  #chat-float-btn:hover {
+    transform: scale(1.1);
+  }
+
+  /* Ventana del chat */
+  #chat-window {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 350px;
     height: 420px;
     background: white;
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
     display: none;
     flex-direction: column;
     overflow: hidden;
     z-index: 9999;
-}
+  }
 
-#chatbot-header {
-    background: #007bff;
+  #chat-header {
+    background: #4A6CFF;
     color: white;
-    padding: 10px;
+    padding: 12px;
     font-size: 18px;
-}
+    text-align: center;
+  }
 
-#chatbot-messages {
-    padding: 10px;
-    flex-grow: 1;
+  #chat-output {
+    padding: 12px;
+    flex: 1;
     overflow-y: auto;
-    font-family: Arial;
     font-size: 14px;
-}
+  }
 
-.message-user {
-    text-align: right;
-    margin: 5px 0;
-    color: #007bff;
-}
-
-.message-bot {
-    text-align: left;
-    margin: 5px 0;
-    color: #333;
-}
-
-#chatbot-input-area {
+  #chat-input {
     display: flex;
     border-top: 1px solid #ddd;
-}
+  }
 
-#chatbot-input {
-    flex-grow: 1;
+  #chat-message {
+    width: 100%;
     padding: 10px;
     border: none;
-}
+    outline: none;
+  }
 
-#chatbot-send {
-    padding: 10px;
-    background: #007bff;
+  #send-btn {
+    width: 80px;
+    background: #4A6CFF;
+    border: none;
     color: white;
-    border: none;
     cursor: pointer;
-}
+  }
+
 
 
 
