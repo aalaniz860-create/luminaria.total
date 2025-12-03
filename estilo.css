@@ -409,6 +409,17 @@ line-height: 60px;
 .btn-carrito:hover {
     background-color: #3e8f43;
 }
+
+.descripcion {
+    margin: 10px 0;
+    padding-left: 20px;
+    font-size: 14px;
+    color: #444;
+}
+
+.descripcion li {
+    margin-bottom: 4px;
+}
 #chatbot-btn {
     position: fixed;
     bottom: 20px;
@@ -482,16 +493,6 @@ line-height: 60px;
     color: white;
     border: none;
     cursor: pointer;
-}
-.descripcion {
-    margin: 10px 0;
-    padding-left: 20px;
-    font-size: 14px;
-    color: #444;
-}
-
-.descripcion li {
-    margin-bottom: 4px;
 }
 
 
