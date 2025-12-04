@@ -9,7 +9,34 @@
 	<link rel="stylesheet" type="text/css" href="estilo.css">
 </head>
 <body>
+<!-- BOTÓN FLOTANTE -->
+<div id="chat-float-btn">💬</div>
 
+<!-- WIDGET DEL CHAT -->
+<div id="chat-widget">
+    <div id="chat-widget-header">
+        Asistente IA
+        <span id="chat-close">✖</span>
+    </div>
+
+    <iframe 
+        src="https://www.stack-ai.com/chat/6931dbed35d1b3a03dc00a0d-4mV7gyutHlVGZY9dlcKuDv"
+        id="chat-iframe">
+    </iframe>
+</div>
+	<script>
+    const chatBtn = document.getElementById("chat-float-btn");
+    const chatWidget = document.getElementById("chat-widget");
+    const chatClose = document.getElementById("chat-close");
+
+    chatBtn.onclick = () => {
+        chatWidget.style.display = "flex";
+    };
+
+    chatClose.onclick = () => {
+        chatWidget.style.display = "none";
+    };
+</script>
 
 <!-- Botón que abre el menú -->
 <i class='bx bx-menu menu-btn' onclick="abrirMenu()"></i>
@@ -109,14 +136,13 @@
 		</a>
 	</div>
 </footer>
-	<script>
-(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="fQF8zRcVSYhXpj5xo3-Gh";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-</script>
+	
 </body>
 <script src="menuu.js"></script>
 <script src="lightbox.js"></script>
 
 </html>
+
 
 
 
