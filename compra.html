@@ -7,6 +7,34 @@
 <link rel="stylesheet" type="text/css" href="estilo.css">
 
 <body>
+	<!-- BOTÓN FLOTANTE -->
+<div id="chat-float-btn">💬</div>
+
+<!-- WIDGET DEL CHAT -->
+<div id="chat-widget">
+    <div id="chat-widget-header">
+        Asistente IA
+        <span id="chat-close">✖</span>
+    </div>
+
+    <iframe 
+        src="https://www.stack-ai.com/chat/6931dbed35d1b3a03dc00a0d-4mV7gyutHlVGZY9dlcKuDv"
+        id="chat-iframe">
+    </iframe>
+</div>
+	<script>
+    const chatBtn = document.getElementById("chat-float-btn");
+    const chatWidget = document.getElementById("chat-widget");
+    const chatClose = document.getElementById("chat-close");
+
+    chatBtn.onclick = () => {
+        chatWidget.style.display = "flex";
+    };
+
+    chatClose.onclick = () => {
+        chatWidget.style.display = "none";
+    };
+</script>
 
 <!-- Botón del menú -->
 <i class='bx bx-menu menu-btn' onclick="abrirMenu()"></i>
@@ -129,3 +157,4 @@ function enviarMensaje() {
 </body>
 
 </html>
+
