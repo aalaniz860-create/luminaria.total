@@ -74,7 +74,7 @@ head{
 	 font-size: 40px;
 }
 .contenedor-servicio{
-	display: flex-stard;
+	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
 	flex-wrap: wrap;
@@ -486,6 +486,7 @@ line-height: 60px;
     color: white;
     cursor: pointer;
   }
+
 
 
 
