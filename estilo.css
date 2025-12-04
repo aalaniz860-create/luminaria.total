@@ -84,8 +84,9 @@ head{
 	width: 350px;
 }
 .checklist-servicio{
-    width: 1000px;
-    font-size: 20px
+    width: 100%;
+    max-width: 1000px;  /* opcional */
+    font-size: 20px;
 }
 .servicie{
 	margin-bottom: 80px;
@@ -485,6 +486,7 @@ line-height: 60px;
     color: white;
     cursor: pointer;
   }
+
 
 
 
